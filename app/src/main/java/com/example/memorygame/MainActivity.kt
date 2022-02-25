@@ -13,10 +13,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
 {
+    var sure : Int = 0
     val yourCountDownTimer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long)
         {
             textView.setText("Time : " + millisUntilFinished / 1000)
+            sure = (millisUntilFinished/1000).toInt()
         }
         override fun onFinish()
         {
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity()
         buttonlar2.forEach { it.setImageResource(defaultImageRef) }
 
         //Daha önce image'lerimizin id'lerini bir diziye aktarmıştık şimdi ise shuffle ile o id'leri kendi içersinde farklı indekslere atarak karıştırdık.
-        //gorseller.shuffle()
+        gorseller.shuffle()
 
         var i = 0;
 
@@ -95,11 +97,13 @@ class MainActivity : AppCompatActivity()
         {
             setTitle("Memory Game")
             setMessage("Try again")
-            setMessage("Score : "+score)
+            setMessage("Score : "+sure+"sn")
             setPositiveButton("OK"){dialogInterface,it ->
                 val intent = intent
                 finish()
-                startActivity(intent)}
+                startActivity(intent)
+                gorseller.shuffle()
+            }
             setNegativeButton("NO"){dialogInterface,it -> finish()}
 
             show()
@@ -121,12 +125,13 @@ class MainActivity : AppCompatActivity()
         var tag = hangiButton.tag.toString().toInt()
         var tagTmp : Int = 0
 
-        hangiButton.setImageResource(gorseller[tag])
+
 
         //hangiButton.isClickable = false ilk buttona bastıktan sonra bu kilitlenmeli sonrasında eğer doğru seçimi yaparsa her ikisi de kilitlenmeli ve score 1 artmalı
         //hangiButton.isInvisible = true eğer bulma işlemi gerçekleşirse iki image'de yok edilebilir.
         sayac++;
         if(sayac == 1){
+            hangiButton.setImageResource(gorseller[tag])
             control = gorseller[tag]
             tagTmp=tag
 
@@ -134,32 +139,37 @@ class MainActivity : AppCompatActivity()
 
         }
         if(sayac == 2){
+            hangiButton.setImageResource(gorseller[tag])
             control1 = gorseller[tag]
-            if(control == control1 && buttonlar[0].id != buttonlar[1].id){
+            if(control == control1 && buttonlar[0].id != buttonlar[1].id)
+            {
                 textView2.text = "score : "+ ++score
 
                 buttonlar[0].isInvisible = true;
                 buttonlar[1].isInvisible = true;
 
-                sayac = 0
-
                 if(8 == score){
                     basicAlert()
                     yourCountDownTimer.cancel()
                 }
+
+                sayac = 0
             }
-            else{
+            else
+            {
                 //Buraya girdiğinde zaten 2 defa bastığını anlıyoruz
-                object : CountDownTimer(1100, 1000) {
+                object : CountDownTimer(1050, 1000) {
 
                     override fun onTick(millisUntilFinished: Long) {
-                        buttonlar.forEach {
+
+                        buttonlar2.forEach {
                             it.isClickable = false
                         }
                     }
 
                     override fun onFinish() {
-                        buttonlar.forEach {
+
+                        buttonlar2.forEach {
                             it.isClickable = true
                         }
                         buttonlar.forEach { it.setImageResource(defaultImageRef) }
