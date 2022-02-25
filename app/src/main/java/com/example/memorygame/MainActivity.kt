@@ -1,25 +1,35 @@
 package com.example.memorygame
 
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import com.example.memorygame.R.drawable.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.sql.Time
+
 
 class MainActivity : AppCompatActivity()
 {
-
+    val yourCountDownTimer = object : CountDownTimer(30000, 1000) {
+        override fun onTick(millisUntilFinished: Long)
+        {
+            textView.setText("Time : " + millisUntilFinished / 1000)
+        }
+        override fun onFinish()
+        {
+            buttonlar.forEach {
+                it.isClickable = false
+                basicAlert()
+            }
+        }
+    }.start()
     //her biri int id'lere sahiptir biz bu id'leri bir diziye aktardık.
     var defaultImageRef = unknown
-
-
+    var counterVisible : Int = 0
+    var complated : Boolean = false
     var gorseller:MutableList<Int> = mutableListOf(
         //import com.example.memorygame.R.drawable.unknown
         ball , beachball , bubble , comic , fire , football , moon , ok , ball , beachball , bubble , comic , fire , football , moon , ok
@@ -39,6 +49,7 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        lateinit var builder : AlertDialog.Builder
 
         buttonlar = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
         buttonlar2 = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
@@ -53,18 +64,47 @@ class MainActivity : AppCompatActivity()
 
         var i = 0;
 
+        //CountDownTimer'ımızı burada kullanıyoruz
+        yourCountDownTimer
 
-        object : CountDownTimer(30000, 1000) {
+
+        //2.YOL
+        /*object : CountDownTimer (30000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
                 textView.setText("Time : " + millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
-                textView.setText("done!")
+                buttonlar.forEach {
+                    it.isClickable = false
+                    basicAlert()
+                }
                 //Oyunu tekrar oynamak isteyip istemediğini sor
             }
-        }.start()
+        }.start()*/
+
+    }
+
+
+    fun basicAlert(){
+
+        val builder = AlertDialog.Builder(this)
+
+        with(builder)
+        {
+            setTitle("Memory Game")
+            setMessage("Try again")
+            setMessage("Score : "+score)
+            setPositiveButton("OK"){dialogInterface,it ->
+                val intent = intent
+                finish()
+                startActivity(intent)}
+            setNegativeButton("NO"){dialogInterface,it -> finish()}
+
+            show()
+        }
+
 
     }
 
@@ -95,31 +135,18 @@ class MainActivity : AppCompatActivity()
         }
         if(sayac == 2){
             control1 = gorseller[tag]
-            if(control == control1){
+            if(control == control1 && buttonlar[0].id != buttonlar[1].id){
                 textView2.text = "score : "+ ++score
 
                 buttonlar[0].isInvisible = true;
                 buttonlar[1].isInvisible = true;
-                object : CountDownTimer(1500, 1000) {
-
-                    override fun onTick(millisUntilFinished: Long) {
-                        buttonlar.forEach {
-                            it.isClickable = false
-                        }
-                    }
-
-                    override fun onFinish() {
-                        buttonlar.forEach {
-                            it.isClickable = true
-                        }
-
-                        buttonlar.forEach { it.setImageResource(defaultImageRef) }
-                        //Oyunu tekrar oynamak isteyip istemediğini sor
-                    }
-                }.start()
-
 
                 sayac = 0
+
+                if(8 == score){
+                    basicAlert()
+                    yourCountDownTimer.cancel()
+                }
             }
             else{
                 //Buraya girdiğinde zaten 2 defa bastığını anlıyoruz
