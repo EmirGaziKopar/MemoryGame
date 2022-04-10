@@ -1,23 +1,39 @@
 package com.example.memorygame
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import com.example.memorygame.R.drawable.*
 import kotlinx.android.synthetic.main.activity_main.*
+import com.example.memorygame.R.drawable.*
+import kotlinx.android.synthetic.main.activity_main.imageView
+import kotlinx.android.synthetic.main.activity_main.imageView10
+import kotlinx.android.synthetic.main.activity_main.imageView11
+import kotlinx.android.synthetic.main.activity_main.imageView12
+import kotlinx.android.synthetic.main.activity_main.imageView13
+import kotlinx.android.synthetic.main.activity_main.imageView14
+import kotlinx.android.synthetic.main.activity_main.imageView15
+import kotlinx.android.synthetic.main.activity_main.imageView16
+import kotlinx.android.synthetic.main.activity_main.imageView2
+import kotlinx.android.synthetic.main.activity_main.imageView3
+import kotlinx.android.synthetic.main.activity_main.imageView4
+import kotlinx.android.synthetic.main.activity_main.imageView5
+import kotlinx.android.synthetic.main.activity_main.imageView6
+import kotlinx.android.synthetic.main.activity_main.imageView7
+import kotlinx.android.synthetic.main.activity_main.imageView8
+import kotlinx.android.synthetic.main.activity_main.imageView9
+import kotlinx.android.synthetic.main.activity_main.textView
+import kotlinx.android.synthetic.main.activity_main2.*
 
-
-class MainActivity : AppCompatActivity()
-{
+class MainActivity2 : AppCompatActivity() {
     var sure : Int = 0
     val yourCountDownTimer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long)
         {
-            textView.setText("Time : " + millisUntilFinished / 1000)
+            textView4.setText("Time : " + millisUntilFinished / 1000)
             sure = (millisUntilFinished/1000).toInt()
         }
         override fun onFinish()
@@ -29,16 +45,17 @@ class MainActivity : AppCompatActivity()
         }
     }.start()
     //her biri int id'lere sahiptir biz bu id'leri bir diziye aktardık.
-    var defaultImageRef = unknown //soru işareti
+    var defaultImageRef = R.drawable.unknown //soru işareti
     var counterVisible : Int = 0
     var complated : Boolean = false
-    var gorseller:MutableList<Int> = mutableListOf(
-        //import com.example.memorygame.R.drawable.unknown
-        ball , beachball , bubble , comic , fire , football , moon , ok , ball , beachball , bubble , comic , fire , football , moon , ok
-    )
-    var control = gorseller[0]
-    var control1 = gorseller[0]
 
+    var gorseller1:MutableList<Int> = mutableListOf(
+        //import com.example.memorygame.R.drawable.* import ettigiiz için böyle yazabildik.
+        yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18 , yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18
+    )
+
+    var control = gorseller1[0]
+    var control1 = gorseller1[0]
 
     var buttonlar : Array<ImageView> = arrayOf()
     var buttonlar2 : Array<ImageView> = arrayOf()
@@ -46,50 +63,29 @@ class MainActivity : AppCompatActivity()
     var score : Int = 0 //basılan 1. ve 2. referanslar aynı mı kontrol etmek için
     var sayac : Int = 0 //her click'de 1 artacak olan sayaç
     var sayac1 : Int = 0 //her click'de her zaman 1 artacak olan sayaç
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
         lateinit var builder : AlertDialog.Builder
 
-        buttonlar = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
-        buttonlar2 = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
+        buttonlar = arrayOf(imageView17,imageView18, imageView19,imageView20,imageView21,imageView22,imageView23,imageView24,imageView25,imageView26,imageView27,imageView28,imageView29,imageView30,imageView31,imageView32,imageView33,imageView34,imageView35,imageView36,imageView37,imageView38,imageView39,imageView40,imageView41,imageView42,imageView43,imageView44,imageView45,imageView46,imageView47,imageView48,imageView49,imageView50,imageView51,imageView52)
+        buttonlar2 = arrayOf(imageView17,imageView18, imageView19,imageView20,imageView21,imageView22,imageView23,imageView24,imageView25,imageView26,imageView27,imageView28,imageView29,imageView30,imageView31,imageView32,imageView33,imageView34,imageView35,imageView36,imageView37,imageView38,imageView39,imageView40,imageView41,imageView42,imageView43,imageView44,imageView45,imageView46,imageView47,imageView48,imageView49,imageView50,imageView51,imageView52)
 
-        //Buradan gelen her bir button iterator'dır özel bir değişkendir
-        //setImageResource ile Image'in kaynağını ayarlayabilir yani değiştirebilirsiniz. Yani ekranda yer alan image'in referansına ulaşarak üzerindeki hangi image'ı göstereceğini belirleyen "@drawable/X" kodundaki X yazan yeri değiştirebilirsiniz.
         buttonlar.forEach { it.setImageResource(defaultImageRef) } //Burada img'in default referansları
-        buttonlar2.forEach { it.setImageResource(defaultImageRef) } // bütün resimleri soru işareti yaptık
+        buttonlar2.forEach { it.setImageResource(defaultImageRef) } //Burada img'in default referansları
 
-        //Daha önce image'lerimizin id'lerini bir diziye aktarmıştık şimdi ise shuffle ile o id'leri kendi içersinde farklı indekslere atarak karıştırdık.
-        gorseller.shuffle()
+        gorseller1.shuffle()
 
         var i = 0;
 
         //CountDownTimer'ımızı burada kullanıyoruz
         yourCountDownTimer
 
-
-        //2.YOL
-        /*object : CountDownTimer (30000, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                textView.setText("Time : " + millisUntilFinished / 1000)
-            }
-
-            override fun onFinish() {
-                buttonlar.forEach {
-                    it.isClickable = false
-                    basicAlert()
-                }
-                //Oyunu tekrar oynamak isteyip istemediğini sor
-            }
-        }.start()*/
-
-    }
-
-    fun goBack(view: View){
-        //Burada geri dön
     }
 
     fun basicAlert(){
@@ -105,7 +101,7 @@ class MainActivity : AppCompatActivity()
                 val intent = intent
                 finish()
                 startActivity(intent)
-                gorseller.shuffle()
+                gorseller1.shuffle()
             }
             setNegativeButton("NO"){dialogInterface,it -> finish()}
 
@@ -115,8 +111,7 @@ class MainActivity : AppCompatActivity()
 
     }
 
-
-    fun tikla(view : View){
+    fun tikla2(view : View){
         //Bu kodu yazarak üzerine bastığımız şeyin referansını alırız ve ona dair herşeye ulaşabiliriz.
         var hangiButton:ImageView = view as ImageView
 
@@ -134,20 +129,20 @@ class MainActivity : AppCompatActivity()
         //hangiButton.isInvisible = true eğer bulma işlemi gerçekleşirse iki image'de yok edilebilir.
         sayac++;
         if(sayac == 1){
-            hangiButton.setImageResource(gorseller[tag])
-            control = gorseller[tag]
+            hangiButton.setImageResource(gorseller1[tag])
+            control = gorseller1[tag]
             tagTmp=tag
 
             tmpButton = hangiButton
 
         }
         if(sayac == 2){
-            hangiButton.setImageResource(gorseller[tag])
-            control1 = gorseller[tag]
+            hangiButton.setImageResource(gorseller1[tag])
+            control1 = gorseller1[tag]
             if(control == control1 && buttonlar[0].id != buttonlar[1].id)
             {
-                textView2.text = "score : "+ ++score
 
+                textView3.text = "score : "+ ++score
                 buttonlar[0].isInvisible = true;
                 buttonlar[1].isInvisible = true;
 
@@ -188,7 +183,6 @@ class MainActivity : AppCompatActivity()
 
 
     }
-
 
 
 }
