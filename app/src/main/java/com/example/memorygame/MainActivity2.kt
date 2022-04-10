@@ -51,7 +51,7 @@ class MainActivity2 : AppCompatActivity() {
 
     var gorseller1:MutableList<Int> = mutableListOf(
         //import com.example.memorygame.R.drawable.* import ettigiiz için böyle yazabildik.
-        yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18 , yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18
+        yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18 , yeni1 , yeni2 , yeni3 , yeni4 , yeni5 , yeni6 , yeni7 , yeni8 , yeni9 , yeni10 , yeni11 , yeni13 , yeni14 , yeni15 , yeni16 , yeni17 , yeni18 , ball , ball
     )
 
     var control = gorseller1[0]
