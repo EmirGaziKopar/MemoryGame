@@ -14,6 +14,7 @@
         android:gravity="center"
         android:text="Match  : "
 
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
