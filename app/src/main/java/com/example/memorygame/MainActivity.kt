@@ -1,5 +1,6 @@
 package com.example.memorygame
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -90,7 +91,9 @@ class MainActivity : AppCompatActivity()
     }
 
     fun goBack(view: View){
-        //Burada geri dön
+        intent = Intent(this,MainActivity3::class.java);
+        finish()
+        startActivity(intent);
     }
 
     fun basicAlert(){

@@ -1,5 +1,6 @@
 package com.example.memorygame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -88,6 +89,13 @@ class MainActivity2 : AppCompatActivity() {
 
     }
 
+
+    fun goBack(view: View){
+        intent = Intent(this,MainActivity3::class.java);
+        finish();
+        startActivity(intent);
+
+    }
     fun basicAlert(){
 
         val builder = AlertDialog.Builder(this)
