@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.memorygame.R.drawable.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main2.*
 
 
 class MainActivity : AppCompatActivity()
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity()
 
     var buttonlar : Array<ImageView> = arrayOf()
     var buttonlar2 : Array<ImageView> = arrayOf()
-
+    var score1 : Int = 0
     var score : Int = 0 //basılan 1. ve 2. referanslar aynı mı kontrol etmek için
     var sayac : Int = 0 //her click'de 1 artacak olan sayaç
     var sayac1 : Int = 0 //her click'de her zaman 1 artacak olan sayaç
@@ -117,6 +118,8 @@ class MainActivity : AppCompatActivity()
 
 
     fun tikla(view : View){
+        //sayac1++;
+        textView5.text = "Counter: "+ ++sayac1;
         //Bu kodu yazarak üzerine bastığımız şeyin referansını alırız ve ona dair herşeye ulaşabiliriz.
         var hangiButton:ImageView = view as ImageView
 
@@ -146,12 +149,13 @@ class MainActivity : AppCompatActivity()
             control1 = gorseller[tag]
             if(control == control1 && buttonlar[0].id != buttonlar[1].id)
             {
-                textView2.text = "score : "+ ++score
-
+                textView2.text = "Match : "+ ++score1 + "/" + (gorseller.count()/2).toString()
+                score+=10;
+                textView10.text = "Score :"+ score;
                 buttonlar[0].isInvisible = true;
                 buttonlar[1].isInvisible = true;
 
-                if(8 == score){
+                if((gorseller.count()/2) == score1){
                     basicAlert()
                     yourCountDownTimer.cancel()
                 }
@@ -160,6 +164,8 @@ class MainActivity : AppCompatActivity()
             }
             else
             {
+                score-=2;
+                textView10.text = "Score :"+ score;
                 //Buraya girdiğinde zaten 2 defa bastığını anlıyoruz
                 object : CountDownTimer(1050, 1000) {
 
