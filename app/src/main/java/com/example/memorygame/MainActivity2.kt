@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isInvisible
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,7 +32,8 @@ import kotlinx.android.synthetic.main.activity_main2.*
 
 class MainActivity2 : AppCompatActivity() {
     var sure : Int = 0
-    val yourCountDownTimer = object : CountDownTimer(300000, 1000) {
+    var isFinis : Boolean = false
+    val yourCountDownTimer = object : CountDownTimer(3000, 1000) {
         override fun onTick(millisUntilFinished: Long)
         {
             textView4.setText("Time : " + millisUntilFinished / 1000)
@@ -39,8 +41,10 @@ class MainActivity2 : AppCompatActivity() {
         }
         override fun onFinish()
         {
+            isFinis = true
             buttonlar.forEach {
                 it.isClickable = false
+
                 basicAlert()
             }
         }
@@ -68,7 +72,8 @@ class MainActivity2 : AppCompatActivity() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
@@ -84,6 +89,11 @@ class MainActivity2 : AppCompatActivity() {
 
         var i = 0;
 
+
+
+
+
+
         //CountDownTimer'ımızı burada kullanıyoruz
         yourCountDownTimer
 
@@ -97,7 +107,13 @@ class MainActivity2 : AppCompatActivity() {
 
     }
     fun basicAlert(){
-
+        val context = this;
+        var db = DataBaseHelper(context) //insert işlemine erişmek için
+        var Score = score
+        var Sure = sure
+        var oyuncu = GameScores(Score.toInt(),Sure.toInt())
+        db.insertData(oyuncu)
+        Toast.makeText(applicationContext,"score: "+score,Toast.LENGTH_LONG).show()
         val builder = AlertDialog.Builder(this)
 
         with(builder)
@@ -159,7 +175,15 @@ class MainActivity2 : AppCompatActivity() {
                 buttonlar[1].isInvisible = true;
 
                 if((gorseller1.count()/2) == score1){
+                    val context = this;
+                    var db = DataBaseHelper(context) //insert işlemine erişmek için
+                    var Score = score
+                    var Sure = sure
+                    var oyuncu = GameScores(Score.toInt(),Sure.toInt())
+                    db.insertData(oyuncu)
+                    Toast.makeText(applicationContext,"score: "+score,Toast.LENGTH_LONG).show()
                     basicAlert()
+
                     yourCountDownTimer.cancel()
                 }
 
