@@ -25,6 +25,8 @@ class MainActivity3 : AppCompatActivity() {
     }
 
     fun scores(view: View){
-
+        val intent = Intent(this,MainActivity4::class.java);
+        finish()
+        startActivity(intent);
     }
 }
