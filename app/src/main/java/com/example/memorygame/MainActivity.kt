@@ -102,9 +102,8 @@ class MainActivity : AppCompatActivity()
         if(sayacc==0){
             val context = this;
             var db = DataBaseHelper(context) //insert işlemine erişmek için
-            var Score = score
-            var Sure = sure
-            var oyuncu = GameScores(Score,Sure)
+            System.out.println("oyuncu : "+score+" "+sure)
+            var oyuncu = GameScores(score,sure)
             db.insertData(oyuncu)
         }
 
@@ -169,6 +168,11 @@ class MainActivity : AppCompatActivity()
                 buttonlar[0].isInvisible = true;
                 buttonlar[1].isInvisible = true;
 
+                /*
+                buttonlar.drop(0);
+                buttonlar.drop(0);
+                listeden çıkar ki tekrar dönmesin
+                */
                 if((gorseller.count()/2) == score1){
                     basicAlert()
                     yourCountDownTimer.cancel()

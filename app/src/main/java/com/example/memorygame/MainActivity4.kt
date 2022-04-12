@@ -20,7 +20,9 @@ class MainActivity4 : AppCompatActivity() {
         //read data
         var data = db.readData() //Burada eğer varsa veriler aktarıldı
         for(i in 0 until data.size){
+            System.out.println((i+1).toString() +"."+ " Time : "+data.get(i).time+" Score : "+ data.get(i).score+"\n")
             textView9.append((i+1).toString() +"."+ " Time : "+data.get(i).time+" Score : "+ data.get(i).score+"\n")
+
         }
 
         /*
