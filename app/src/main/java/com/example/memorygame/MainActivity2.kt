@@ -31,9 +31,10 @@ import kotlinx.android.synthetic.main.activity_main.textView
 import kotlinx.android.synthetic.main.activity_main2.*
 
 class MainActivity2 : AppCompatActivity() {
+    var sayacc : Int = 0
     var sure : Int = 0
     var isFinis : Boolean = false
-    val yourCountDownTimer = object : CountDownTimer(3000, 1000) {
+    val yourCountDownTimer = object : CountDownTimer(300000, 1000) {
         override fun onTick(millisUntilFinished: Long)
         {
             textView4.setText("Time : " + millisUntilFinished / 1000)
@@ -78,7 +79,7 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
 
         lateinit var builder : AlertDialog.Builder
-
+        sayacc = 0
         buttonlar = arrayOf(imageView17,imageView18, imageView19,imageView20,imageView21,imageView22,imageView23,imageView24,imageView25,imageView26,imageView27,imageView28,imageView29,imageView30,imageView31,imageView32,imageView33,imageView34,imageView35,imageView36,imageView37,imageView38,imageView39,imageView40,imageView41,imageView42,imageView43,imageView44,imageView45,imageView46,imageView47,imageView48,imageView49,imageView50,imageView51,imageView52)
         buttonlar2 = arrayOf(imageView17,imageView18, imageView19,imageView20,imageView21,imageView22,imageView23,imageView24,imageView25,imageView26,imageView27,imageView28,imageView29,imageView30,imageView31,imageView32,imageView33,imageView34,imageView35,imageView36,imageView37,imageView38,imageView39,imageView40,imageView41,imageView42,imageView43,imageView44,imageView45,imageView46,imageView47,imageView48,imageView49,imageView50,imageView51,imageView52)
 
@@ -107,15 +108,20 @@ class MainActivity2 : AppCompatActivity() {
 
     }
     fun basicAlert(){
-        val context = this;
-        var db = DataBaseHelper(context) //insert işlemine erişmek için
         var Score = score
         var Sure = sure
-        var oyuncu = GameScores(Score.toInt(),Sure.toInt())
-        db.insertData(oyuncu)
+        if(sayacc == 0){
+            val context = this;
+            var db = DataBaseHelper(context) //insert işlemine erişmek için
+
+            System.out.println("oyuncu : "+Score+" "+Sure)
+            var oyuncu = GameScores(score,sure)
+            db.insertData(oyuncu)
+        }
+
         Toast.makeText(applicationContext,"score: "+score,Toast.LENGTH_LONG).show()
         val builder = AlertDialog.Builder(this)
-
+        sayacc++
         with(builder)
         {
             setTitle("Memory Gameee")
@@ -175,12 +181,7 @@ class MainActivity2 : AppCompatActivity() {
                 buttonlar[1].isInvisible = true;
 
                 if((gorseller1.count()/2) == score1){
-                    val context = this;
-                    var db = DataBaseHelper(context) //insert işlemine erişmek için
-                    var Score = score
-                    var Sure = sure
-                    var oyuncu = GameScores(Score.toInt(),Sure.toInt())
-                    db.insertData(oyuncu)
+
                     Toast.makeText(applicationContext,"score: "+score,Toast.LENGTH_LONG).show()
                     basicAlert()
 

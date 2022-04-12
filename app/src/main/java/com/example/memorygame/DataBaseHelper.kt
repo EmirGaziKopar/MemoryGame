@@ -49,4 +49,24 @@ class DataBaseHelper(var context:Context): SQLiteOpenHelper(context, tableName,n
         }
     }
 
+    // We define function to read data
+    fun readData(): MutableList<GameScores> {
+        var list : MutableList<GameScores> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from "+ tableName
+        var result = db.rawQuery(query,null)//baslangic degeri null
+        if(result.moveToFirst()){ //deger var mı diye kontrol etmek için imleci ilk satırdaki değere doğrulttuk
+            do {
+                var oyuncu = GameScores()
+                oyuncu.time = result.getColumnIndex(sure).toInt()
+                oyuncu.score = result.getColumnIndex(score).toInt()
+                list.add(oyuncu)
+
+
+            }while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return list //listeyi text'de göstermek için return ediyoruz.
+    }
 }

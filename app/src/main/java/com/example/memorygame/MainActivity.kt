@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main2.*
 class MainActivity : AppCompatActivity()
 {
     var sure : Int = 0
+    var sayacc : Int = 0
     val yourCountDownTimer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long)
         {
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         lateinit var builder : AlertDialog.Builder
-
+        sayacc = 0
         buttonlar = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
         buttonlar2 = arrayOf(imageView,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8,imageView9,imageView10,imageView11,imageView12,imageView13,imageView14,imageView15,imageView16)
 
@@ -97,9 +99,18 @@ class MainActivity : AppCompatActivity()
     }
 
     fun basicAlert(){
+        if(sayacc==0){
+            val context = this;
+            var db = DataBaseHelper(context) //insert işlemine erişmek için
+            var Score = score
+            var Sure = sure
+            var oyuncu = GameScores(Score,Sure)
+            db.insertData(oyuncu)
+        }
 
+        Toast.makeText(applicationContext,"score: "+score, Toast.LENGTH_LONG).show()
         val builder = AlertDialog.Builder(this)
-
+        sayacc++
         with(builder)
         {
             setTitle("Memory Gameee")

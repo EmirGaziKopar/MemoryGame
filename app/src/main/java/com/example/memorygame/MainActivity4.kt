@@ -12,6 +12,18 @@ class MainActivity4 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main4)
+
+        textView9.text = "Score : "
+        val context = this
+        val db = DataBaseHelper(context)
+
+        //read data
+        var data = db.readData() //Burada eğer varsa veriler aktarıldı
+        for(i in 0 until data.size){
+            textView9.append((i+1).toString() +"."+ " Time : "+data.get(i).time+" Score : "+ data.get(i).score+"\n")
+        }
+
+        /*
         val meyveler = listOf("300", "250", "246", "200", "186", "183", "152", "80", "32", "20")
 
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, meyveler)
@@ -24,5 +36,8 @@ class MainActivity4 : AppCompatActivity() {
 
             Toast.makeText( this, "Seçilen meyve: $secilenMeyve", Toast.LENGTH_SHORT).show()
         }
+        */
+
+
     }
 }
