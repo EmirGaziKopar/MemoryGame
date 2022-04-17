@@ -35,5 +35,5 @@ default değerini vererek kapattık ve score değerini belirtildiği miktarda az
 
 DatabaseHelper'ı yazarak oyun sonlarında score'u kaydetmesi için kullandık. Kaydedilen score'ları listelerken textView kullandık. Ayrıca oyunun başında
 
-medium seçmeniz halinde 4*4 , hard seçmeniz halinde 6*6 olan aktivite ekranları sunduk. Ekrandaki görselleri grid layout kullanarak dizdik.
+medium seçmeniz halinde 4x4 , hard seçmeniz halinde 6x6 olan aktivite ekranları sunduk. Ekrandaki görselleri grid layout kullanarak dizdik.
 
