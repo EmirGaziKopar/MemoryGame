@@ -23,7 +23,7 @@ referansina ulaştığınız ve ardından da içerisinde yer alan tag'e ulaştı
 Sonrasında kodun içerisine sayaç yerleştirerek sayac == 1 olduğunda birinci basılan resmin değerini sayac == 2 olduğunda ise
 
 
-2. basılan resmin referans değerini ve birinciyle aynı olup olmadığını kontrol ederek eğer aynıysa ve id'değerleri de farklıysa isInvisible = true yaptık. ve bulunan resimleri yok ettik
+2. basılan resmin referans değerini ve birinciyle aynı olup olmadığını kontrol ederek eğer aynıysa ve id'değerleri de farklıysa isInvisible = true yaptık ve bulunan resimleri yok ettik
 
 Yani kullanıcının aynı resme iki kere basması durumunda score yazmaması için id değerlerinin farklı olması şartını koda ekledik.
 
