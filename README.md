@@ -37,3 +37,18 @@ DatabaseHelper'ı yazarak oyun sonlarında score'u kaydetmesi için kullandık. 
 
 medium seçmeniz halinde 4x4 , hard seçmeniz halinde 6x6 olan aktivite ekranları sunduk. Ekrandaki görselleri grid layout kullanarak dizdik.
 
+
+Emir Gazi Kopar
+
+İbrahim Burak Yakar
+
+Berk Taha Demir
+
+Sergen Aytuğ Can
+
+
+
+
+
+
+
